@@ -4,6 +4,7 @@ from openai import OpenAI
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai_api_key = st.secrets.OpenAIAPI.openai_api_key
 
+# Create an OpenAI client.
 client = OpenAI(api_key=openai_api_key)
 
 # st.session_stateを使いメッセージのやりとりを保存
@@ -19,7 +20,7 @@ def communicate():
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     messages.append(user_message)
 
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=messages
     )
